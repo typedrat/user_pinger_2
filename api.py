@@ -546,4 +546,4 @@ static_files_dir = os.path.join(pinger_dir, 'www')
 api.mount("/", StaticFiles(directory=static_files_dir), name="static")
 
 if __name__ == "__main__":
-    uvicorn.run(api, port=5000)
+    uvicorn.run(api, host="0.0.0.0", port=5000)
