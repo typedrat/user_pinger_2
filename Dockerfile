@@ -10,6 +10,9 @@ WORKDIR /user_pinger
 COPY requirements.txt /user_pinger/requirements.txt
 RUN /root/.cargo/bin/uv pip install --system --no-cache -r /user_pinger/requirements.txt
 
-COPY --link supervisord.conf *.py sql templates www /user_pinger/
+COPY --link supervisord.conf *.py /user_pinger/
+COPY --link sql/ /user_pinger/sql/
+COPY --link templates/ /user_pinger/templates/
+COPY --link www/ /user_pinger/www/
 
 CMD [ "supervisord", "-c", "/user_pinger/supervisord.conf" ]
