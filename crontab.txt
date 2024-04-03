@@ -1,0 +1,1 @@
+0 0 * * * /usr/local/bin/python /user_pinger/update_wiki.py

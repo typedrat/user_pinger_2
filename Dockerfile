@@ -5,6 +5,10 @@ ADD --chmod=755 https://astral.sh/uv/install.sh /install.sh
 RUN /install.sh && rm /install.sh
 RUN /root/.cargo/bin/uv pip install --system --no-cache supervisor
 
+COPY crontab.txt /var/crontab.txt
+RUN crontab /var/crontab.txt
+RUN chmod 600 /etc/crontab
+
 WORKDIR /user_pinger
 
 COPY requirements.txt /user_pinger/requirements.txt
