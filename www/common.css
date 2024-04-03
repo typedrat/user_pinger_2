@@ -1,0 +1,360 @@
+/* Styling for website elements shared across all pages */
+/* Includes boilerplate stuff like the headers, footers, and fonts */
+/* Unique page content will get its own index.css */
+
+/* Page layout */
+html {
+    min-height: 100%;
+}
+
+/* Fuck Chrome, fuck round Chrome, fuck Microsoft Chrome */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: linear-gradient(
+        0deg,
+        rgba(201, 200, 204, 1) 0%,
+        rgba(211, 210, 214, 1) 1.5%
+    );
+    min-height: 100%;
+}
+
+a {
+    color: #1e1ef4;
+}
+
+#banner {
+    background: linear-gradient(0deg, rgb(34, 38, 65) 0%, rgb(40, 44, 72) 100%);
+    min-height: 7vh;
+    line-height: 7vh;
+    text-align: center;
+    font-size: min(6vh, 9vw);
+    padding: 2vh 5vw 2vh 5vw;
+    box-shadow: 0 0 16px 2px rgba(0, 0, 0, 0.4);
+}
+
+#website-title {
+    float: left;
+    font-weight: bold;
+}
+
+#website-title a {
+    color: #f3f3f3;
+    text-decoration: none;
+}
+
+#website-title a:hover,
+#website-title a:focus {
+    text-shadow: 0 0 10px black, 0 0 10px black;
+}
+
+/* Dommenu */
+#menu {
+    max-height: 0;
+    list-style: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    clear: both;
+    text-align: right;
+    font-size: 2.8vh;
+    font-weight: bold;
+    transition: max-height 0.2s ease-out;
+}
+
+/* Checkboxes are ugly so hide ours in favor of an icon */
+#menu-btn {
+    display: none;
+}
+
+/* Glorious CSS dropdown */
+#menu-btn:checked ~ #menu {
+    max-height: 1420px;
+}
+
+#menu-btn:checked ~ #menu-icon .navicon {
+    background-color: transparent;
+}
+
+#menu-btn:checked ~ #menu-icon .navicon:before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+#menu-btn:checked ~ #menu-icon .navicon:after {
+    transform: rotate(-45deg);
+    top: -5px;
+}
+
+#menu-icon {
+    padding: 3vh 2vh 3vh 2vh;
+    float: right;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+#menu-icon .navicon {
+    display: block;
+    background: #f3f3f3;
+    height: 0.7vh;
+    width: 5vh;
+    transition: background 0.1s;
+}
+
+#menu li a {
+    display: inline-block;
+    text-decoration: none;
+    color: #f3f3f3;
+    border-radius: 8px;
+    padding: 0.5vh 3vh 0.5vh 3vh;
+    transition: color 0.15s;
+}
+
+/* These before and after elements are what rotate to make the X */
+#menu-icon .navicon:before,
+#menu-icon .navicon:after {
+    display: block;
+    background: #f3f3f3;
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transition: all 0.2s;
+}
+
+#menu-icon .navicon:before {
+    top: 1.8vh;
+}
+
+#menu-icon .navicon:after {
+    top: -2.5vh;
+}
+
+/* Expand menu on large screens */
+@media screen and (min-width: 1050px) {
+    #menu {
+        float: right;
+        max-height: none;
+        clear: none;
+        overflow: visible;
+    }
+    #menu > li {
+        float: left;
+        position: relative;
+    }
+    #menu-icon {
+        display: none;
+    }
+
+    #menu > li:hover:after,
+    #menu > li:focus:after,
+    #menu > li:focus-within:after {
+        position: absolute;
+        top: 75%;
+        right: 40%;
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 2vh solid transparent;
+        border-right: 2vh solid transparent;
+        border-bottom: 2.5vh solid #303030;
+    }
+
+    #menu li:hover ~ li a,
+    #menu li:focus ~ li a,
+    #menu li:focus-within ~ li a,
+    #menu:hover li a,
+    #menu:focus li a,
+    #menu:focus-within li a,
+    #menu .submenu:focus li a,
+    #menu .submenu:focus-within li a,
+    #menu .submenu:hover li a {
+        color: #f3f3f360;
+    }
+
+    #menu li:hover a,
+    #menu li:focus a,
+    #menu li:focus-within a,
+    #menu .submenu li:focus a,
+    #menu .submenu li:focus-within a,
+    #menu .submenu li:hover a {
+        color: #fff;
+    }
+
+    /* Show submenus on hover */
+    #menu > li:hover > .submenu,
+    #menu > li:focus > .submenu,
+    #menu > li:focus-within > .submenu {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .submenu {
+        position: absolute;
+        right: 0;
+        width: max-content;
+        background-color: #303030;
+        border-radius: 8px;
+        max-height: fit-content !important;
+        opacity: 0;
+        pointer-events: none;
+        box-shadow: none !important;
+    }
+
+    .submenu-icon {
+        display: none;
+    }
+
+    .submenu li a {
+        display: block !important;
+        line-height: 220%;
+    }
+
+    .submenu li:not(:last-child) a:after {
+        content: "";
+        display: block;
+        height: 1px;
+        width: 100%;
+        background-color: #ffffff15;
+    }
+}
+
+/* Reduce whitespace on small screens */
+@media screen and (max-width: 1100px) {
+    #content {
+        margin: 4vh 4vw 7vh 4vw !important;
+        padding: 5vh 5vw 5vh 5vw !important;
+    }
+
+    #banner {
+        font-size: min(7vh, 10vw);
+    }
+
+    #menu {
+        font-size: 3vh;
+    }
+
+    .submenu {
+        font-size: 2.5vh;
+    }
+}
+
+/* Submenu */
+.submenu {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    padding: 0;
+    list-style: none;
+    box-shadow: 0 1px #fff2, 0 -1px #fff2;
+    font-size: 2vh;
+    font-weight: normal;
+}
+
+.submenu-btn {
+    display: none;
+}
+
+.submenu-btn:checked ~ .submenu {
+    max-height: 420px;
+}
+
+.submenu-btn:checked ~ .submenu-icon .submenu-navicon:after {
+    transform: rotate(45deg);
+}
+
+.submenu-btn:checked ~ .submenu-icon .submenu-navicon:before {
+    transform: rotate(-45deg);
+}
+
+.submenu-icon {
+    position: relative;
+    padding: 4vh 0 3.3vh 0;
+    cursor: pointer;
+    border-radius: 8px;
+    float: right;
+}
+
+.submenu .navicon {
+    background-color: #f3f3f340;
+}
+
+.submenu-icon .submenu-navicon {
+    display: block;
+    width: 5vh;
+}
+
+.submenu-icon .submenu-navicon:before,
+.submenu-icon .submenu-navicon:after {
+    display: block;
+    background: #f3f3f3;
+    content: "";
+    height: 8%;
+    width: 40%;
+    position: absolute;
+    top: 55%;
+    transition: transform 0.3s;
+}
+
+.submenu-icon .submenu-navicon:before {
+    transform: rotate(45deg);
+    left: 18%;
+}
+
+.submenu-icon .submenu-navicon:after {
+    transform: rotate(-45deg);
+    left: 40%;
+}
+
+/* I remember when they first invented content */
+/* Sweet, sweet content */
+/* I ALWAYS HATED IT */
+#content {
+    background-color: #f3f3f3;
+    color: #252525;
+    margin: 9vh 9vw 9vh 9vw;
+    padding: 4vh 5vw 5vh 5vw;
+    border: solid 1px #00000030;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+/* I feel like I should just be able to do `noscript {}` */
+/* Vim even does syntax highlighting like it's valid */
+/* Doesn't work though, and I supposed that makes sense */
+/* it's not a _real_ html element per-se */
+#noscript {
+    text-align: center;
+    color: red;
+}
+
+/* FEET ðŸ˜³ */
+#footer {
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+#footer a {
+    text-decoration: none;
+}
+
+@media (prefers-contrast: more) {
+    body {
+        background: #fff;
+    }
+
+    #content {
+        background-color: #fff;
+        color: #000;
+        border: solid 3px #000;
+    }
+
+    #banner {
+        background: #000;
+    }
+}
